@@ -150,7 +150,7 @@ public class MeBridgePeripheral extends BasePeripheral<BlockEntityPeripheralOwne
 
     @LuaFunction(mainThread = true)
     public final boolean isConnected() {
-        return node.getGrid() != null && node.hasGridBooted();
+        return node.getGrid() != null && node.hasGridBooted() && node.isActive();
     }
 
     @LuaFunction
@@ -445,6 +445,14 @@ public class MeBridgePeripheral extends BasePeripheral<BlockEntityPeripheralOwne
             return notConnected();
 
         return MethodResult.of(AppEngApi.listFluids(AppEngApi.getMonitor(node), getCraftingService(), 0));
+    }
+
+    @LuaFunction(mainThread = true)
+    public final MethodResult listGas() {
+        if (!isConnected())
+            return notConnected();
+
+        return MethodResult.of(AppEngApi.listGases(AppEngApi.getMonitor(node), getCraftingService(), 0));
     }
 
     @LuaFunction(mainThread = true)
