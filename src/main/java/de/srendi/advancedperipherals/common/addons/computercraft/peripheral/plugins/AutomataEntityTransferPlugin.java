@@ -4,7 +4,6 @@ import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.lua.MethodResult;
 import de.srendi.advancedperipherals.common.addons.computercraft.owner.TurtlePeripheralOwner;
-import de.srendi.advancedperipherals.common.util.LuaConverter;
 import de.srendi.advancedperipherals.lib.peripherals.AutomataCorePeripheral;
 import de.srendi.advancedperipherals.lib.peripherals.IPeripheralOperation;
 import net.minecraft.core.BlockPos;
@@ -112,6 +111,6 @@ public class AutomataEntityTransferPlugin extends AutomataCorePlugin {
     @LuaFunction(mainThread = true)
     public final MethodResult getCapturedAnimal() {
         Entity extractedEntity = extractEntity();
-        return MethodResult.of(LuaConverter.completeEntityToLua(extractedEntity, automataCore.getPeripheralOwner().getToolInMainHand()));
+        return MethodResult.of(AutomataEntityHandPlugin.completeEntityToLuaWithShearable(extractedEntity, automataCore.getPeripheralOwner()));
     }
 }
